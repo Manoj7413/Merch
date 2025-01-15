@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chitravihar/AddToCart.dart';
+import 'package:chitravihar/Products.dart';
 import 'package:chitravihar/footer.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(5)),
             ),
-            child: const TextField(
+            child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search....',
                 border: InputBorder.none,
@@ -134,17 +135,25 @@ class _HomePageState extends State<HomePage> {
                   // Carousel Slider
                   CarouselSlider(
                     items: _images.map((imagePath) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10), // Rounded corners for the image
-                          border: Border.all(color: Colors.blue, width: 2), // Optional: Add a border
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10), // Clip the image corners
-                          child: Image.asset(
-                            imagePath,
-                            fit: BoxFit.cover,
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => products()),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10), // Rounded corners for the image
+                            border: Border.all(color: Colors.blue, width: 2), // Optional: Add a border
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10), // Clip the image corners
+                            child: Image.asset(
+                              imagePath,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       );
@@ -162,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: _images.asMap().entries.map((entry) {
@@ -189,17 +198,25 @@ class _HomePageState extends State<HomePage> {
                   Align(alignment:Alignment.center,child: Text("Latest Collections",style: TextStyle(fontSize: 30),)),
                   CarouselSlider(
                     items: _images.map((imagePath) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10), // Rounded corners for the image
-                          border: Border.all(color: Colors.blue, width: 2), // Optional: Add a border
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10), // Clip the image corners
-                          child: Image.asset(
-                            imagePath,
-                            fit: BoxFit.cover,
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => products()),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10), // Rounded corners for the image
+                            border: Border.all(color: Colors.blue, width: 2), // Optional: Add a border
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10), // Clip the image corners
+                            child: Image.asset(
+                              imagePath,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       );
@@ -216,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: _images.asMap().entries.map((entry) {
@@ -238,6 +255,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     }).toList(),
                   ),
+
                   //for men
                   SizedBox(height: 20,),
                   Align(alignment:Alignment.center,child: Text(" Shop by Category- Men",style: TextStyle(fontSize: 30),)),
@@ -250,14 +268,21 @@ class _HomePageState extends State<HomePage> {
                       ),
                       itemCount: 15,
                       shrinkWrap: true,
-
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Container(
-                            color: index.isEven ? Colors.blue : Colors.red,
-                            child: Center(
-                              child: Text('$index'),
-                            ),
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => products()),
+                            );
+                          },
+                          child: Container(
+                              color: index.isEven ? Colors.blue : Colors.red,
+                              child: Center(
+                                child: Text('$index'),
+                              ),
+                          ),
                         );
                       },
                     ),
@@ -276,10 +301,18 @@ class _HomePageState extends State<HomePage> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Container(
-                          color: index.isEven ? Colors.blue : Colors.red,
-                          child: Center(
-                            child: Text('$index'),
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => products()),
+                            );
+                          },
+                          child: Container(
+                            color: index.isEven ? Colors.blue : Colors.red,
+                            child: Center(
+                              child: Text('$index'),
+                            ),
                           ),
                         );
                       },
@@ -367,7 +400,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(height: 20),
                         // App Download and Payment Methods
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
@@ -507,20 +540,3 @@ Widget gridItem(String imagePath, String title) {
   );
 }
 }
-//
-// const Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: [
-// Text(
-// 'Jackets 239 Products',
-// style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-// ),
-// Row(
-// children: [
-// Icon(Icons.sort, color: Colors.black),
-// SizedBox(width: 5),
-// Text('Sort by: Price: High to Low'),
-// ],
-// ),
-// ],
-// );

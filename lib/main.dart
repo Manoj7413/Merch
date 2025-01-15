@@ -1,9 +1,9 @@
 import 'package:chitravihar/AddToCart.dart';
 import 'package:chitravihar/MainProduct.dart';
+import 'package:chitravihar/Myhome.dart';
 import 'package:chitravihar/Products.dart';
 import 'package:chitravihar/Thumbnail.dart';
 import 'package:flutter/material.dart';
-import 'Myhome.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,8 +12,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ProductPage(),
+    return MaterialApp(
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

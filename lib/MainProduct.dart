@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chitravihar/Thumbnail.dart';
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _ProductPageState extends State<ProductPage> {
                       return Image.network(imageUrl, fit: BoxFit.cover);
                     }).toList(),
                     options: CarouselOptions(
-                      height: 550,
+                      height: 560,
                       viewportFraction: 1,
                       initialPage: _currentIndex,
                       onPageChanged: (index, reason) {
@@ -119,7 +120,7 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                
+
                     // Pricing
                     Row(
                       children: const [
@@ -154,9 +155,9 @@ class _ProductPageState extends State<ProductPage> {
                       'Inclusive of all taxes',
                       style: TextStyle(color: Colors.grey),
                     ),
-                
+
                     const SizedBox(height: 16),
-                
+
                     // Color options
                     const Text(
                       'Colour Options: Chocolate Tarte',
@@ -184,9 +185,9 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                       ],
                     ),
-                
+
                     const SizedBox(height: 16),
-                
+
                     // Size options
                     const Text(
                       'Select Size',
@@ -202,9 +203,9 @@ class _ProductPageState extends State<ProductPage> {
                       ))
                           .toList(),
                     ),
-                
+
                     const SizedBox(height: 16),
-                
+
                     // Add to Bag and Wishlist
                     Row(
                       children: [
@@ -252,7 +253,12 @@ class _ProductPageState extends State<ProductPage> {
                       ],
                     ),
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 30),
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 0.5,
+                    ),
+                    const SizedBox(height: 10),
 
                     Text('Save Extra With These Offers',style: TextStyle(fontWeight: FontWeight.bold),),
 
@@ -282,7 +288,7 @@ class _ProductPageState extends State<ProductPage> {
                         ),
 
                         const SizedBox(height: 20),
-                
+
                         // Delivery Details Section
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,9 +345,9 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                           ],
                         ),
-                
+
                         const SizedBox(height: 17),
-                
+
                         // Key Highlights Section
                         const Text(
                           "Key Highlights",
@@ -392,6 +398,154 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 10,),
+                        SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Product Description Section
+                              ExpansionTile(
+                                title: Row(
+                                  children: [
+                                    Icon(Icons.list_alt),
+                                    SizedBox(width: 5,),
+                                    Text(
+                                      "Product Description",
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Manufacture, Care and Fit"),
+                                  ),
+                                ],
+                              ),
+
+                              // 15 Days Returns & Exchange Section
+                              ExpansionTile(
+                                title: Row(
+                                  children: [
+                                    Icon(Icons.currency_exchange,size: 20,),
+                                    SizedBox(width: 5,),
+                                    Text(
+                                      "15 Days Returns & Exchange",
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                // subtitle: Text("Know about return & exchange policy"),
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Easy returns up to 15 days of delivery. Exchange available on select pincodes.",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              // Icons with labels
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Icon(Icons.payment, color: Colors.yellow),
+                                        SizedBox(height: 4),
+                                        Text("100% SECURE PAYMENT"),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Icon(Icons.refresh, color: Colors.blue),
+                                        SizedBox(height: 4),
+                                        Text("EASY RETURNS & INSTANT REFUNDS"),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Icon(Icons.verified, color: Colors.orange),
+                                        SizedBox(height: 4),
+                                        Text("100% GENUINE PRODUCT"),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              Divider(thickness: 1),
+
+                              // Product Reviews Section
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Text(
+                                  "Product Reviews",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                  children: [
+                                    Text("88% of verified buyers recommend this product"),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          "4.5",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 40,
+                                          ),
+                                        ),
+                                        Text("443 ratings"),
+                                        Row(
+                                          children: List.generate(5, (index) => Icon(Icons.star, color: Colors.yellow, size: 16),
+                                          ),
+                                        ),
+                                        SizedBox(height: 8),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(5)
+                                            )
+                                          ),
+                                          onPressed: () {},
+                                          child: Text("RATE",style: TextStyle(fontWeight: FontWeight.bold),),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: 16),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          RatingRow(stars: 5, count: 255, percentage: 0.58),
+                                          RatingRow(stars: 4, count: 134, percentage: 0.32),
+                                          RatingRow(stars: 3, count: 54, percentage: 0.10),
+                                          RatingRow(stars: 2, count: 0, percentage: 0.0),
+                                          RatingRow(stars: 1, count: 0, percentage: 0.0),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -404,3 +558,35 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 }
+
+class RatingRow extends StatelessWidget {
+  final int stars;
+  final int count;
+  final double percentage;
+
+  const RatingRow({
+    required this.stars,
+    required this.count,
+    required this.percentage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text("$stars★"),
+        SizedBox(width: 8),
+        Expanded(
+          child: LinearProgressIndicator(
+            value: percentage,
+            backgroundColor: Colors.grey.shade300,
+            color: Colors.green,
+          ),
+        ),
+        SizedBox(width: 8),
+        Text("($count)"),
+      ],
+    );
+  }
+}
+
