@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chitravihar/AddToCart.dart';
 import 'package:chitravihar/Products.dart';
 import 'package:chitravihar/footer.dart';
+import 'package:chitravihar/profile.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,12 +15,14 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   int _currentIndex2 = 0;
   bool isHovered = false;
+  OverlayEntry? _dropdownOverlay;
   final List<String> _images = [
     'assets/images/ladki.jpg',
     'assets/images/ladki.jpg',
     'assets/images/ladki.jpg',
     'assets/images/ladki.jpg',
   ];
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -26,26 +30,33 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFgX8CD1O-Zx_z6Ql7vSbzuNSMPQf9lYlaMHZx1so5wtWVxlOx8FawqnncU1Pc9vLrE4&usqp=CAU',scale: 5,), // Add your logo
+        title: Image.network(
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFgX8CD1O-Zx_z6Ql7vSbzuNSMPQf9lYlaMHZx1so5wtWVxlOx8FawqnncU1Pc9vLrE4&usqp=CAU',
+          scale: 5,),
+        // Add your logo
         actions: [
           Align(alignment: Alignment.centerLeft,),
           Row(
             children: [
               TextButton(
-                  onPressed: (){},
-                  child: Text('Men',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800),),
+                onPressed: () {},
+                child: Text('Men', style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w800),),
               ),
               TextButton(
-                onPressed: (){},
-                child: Text('Women',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800)),
+                onPressed: () {},
+                child: Text('Women', style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w800)),
               ),
               TextButton(
-                onPressed: (){},
-                child: Text('Mobile Cover',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800)),
+                onPressed: () {},
+                child: Text('Mobile Cover', style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w800)),
               ),
               TextButton(
-                onPressed: (){},
-                child: Text('Shorts',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800)),
+                onPressed: () {},
+                child: Text('Shorts', style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w800)),
               ),
             ],
           ),
@@ -53,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             // alignment: Alignment.centerLeft,
             height: 40,
-            width: screenWidth*0.3,
+            width: screenWidth * 0.3,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -79,17 +90,11 @@ class _HomePageState extends State<HomePage> {
               width: 10,
             ),
           ),
-          MouseRegion(
-            onEnter: (_)=>setState(() =>isHovered=true),
-            onExit: (_)=>setState(() =>isHovered=false),
-            child: TextButton(
-                onPressed: (){},
-                child: AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: 100),
-                  style: TextStyle(fontSize:isHovered ? 16 : 16, fontWeight: FontWeight.bold, color: Colors.black),
-                  child: Text("LOGIN"),
-                ),
-            ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));
+            },
+            icon: Icon(Icons.person_outline_sharp),
           ),
           IconButton(
             icon: Icon(Icons.favorite_border),
@@ -98,7 +103,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.shopping_cart_outlined),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => CartPage()));
             },
           ),
         ],
@@ -143,13 +149,17 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), // Rounded corners for the image
-                            border: Border.all(color: Colors.blue, width: 2), // Optional: Add a border
+                            borderRadius: BorderRadius.circular(10),
+                            // Rounded corners for the image
+                            border: Border.all(color: Colors.blue,
+                                width: 2), // Optional: Add a border
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10), // Clip the image corners
+                            borderRadius: BorderRadius.circular(10),
+                            // Clip the image corners
                             child: Image.asset(
                               imagePath,
                               fit: BoxFit.cover,
@@ -174,11 +184,15 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: _images.asMap().entries.map((entry) {
+                    children: _images
+                        .asMap()
+                        .entries
+                        .map((entry) {
                       return GestureDetector(
-                        onTap: () => setState(() {
-                          _currentIndex = entry.key;
-                        }),
+                        onTap: () =>
+                            setState(() {
+                              _currentIndex = entry.key;
+                            }),
                         child: Container(
                           width: 8.0,
                           height: 8.0,
@@ -187,7 +201,8 @@ class _HomePageState extends State<HomePage> {
                             shape: BoxShape.circle,
                             color: _currentIndex == entry.key
                                 ? Colors.blue // Active indicator color
-                                : Colors.blue.withOpacity(0.3), // Inactive indicator color
+                                : Colors.blue.withOpacity(
+                                0.3), // Inactive indicator color
                           ),
                         ),
                       );
@@ -195,7 +210,9 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   SizedBox(height: 20,),
-                  Align(alignment:Alignment.center,child: Text("Latest Collections",style: TextStyle(fontSize: 30),)),
+                  Align(alignment: Alignment.center,
+                      child: Text(
+                        "Latest Collections", style: TextStyle(fontSize: 30),)),
                   CarouselSlider(
                     items: _images.map((imagePath) {
                       return InkWell(
@@ -206,13 +223,17 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), // Rounded corners for the image
-                            border: Border.all(color: Colors.blue, width: 2), // Optional: Add a border
+                            borderRadius: BorderRadius.circular(10),
+                            // Rounded corners for the image
+                            border: Border.all(color: Colors.blue,
+                                width: 2), // Optional: Add a border
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10), // Clip the image corners
+                            borderRadius: BorderRadius.circular(10),
+                            // Clip the image corners
                             child: Image.asset(
                               imagePath,
                               fit: BoxFit.cover,
@@ -225,7 +246,8 @@ class _HomePageState extends State<HomePage> {
                       height: 450,
                       autoPlay: true,
                       // enlargeCenterPage: true,
-                      viewportFraction: 0.3, // Adjust for minimal spacing between items
+                      viewportFraction: 0.3,
+                      // Adjust for minimal spacing between items
                       onPageChanged: (index, reason) {
                         setState(() {
                           _currentIndex2 = index; // Update the active index
@@ -236,11 +258,15 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: _images.asMap().entries.map((entry) {
+                    children: _images
+                        .asMap()
+                        .entries
+                        .map((entry) {
                       return GestureDetector(
-                        onTap: () => setState(() {
-                          _currentIndex2 = entry.key;
-                        }),
+                        onTap: () =>
+                            setState(() {
+                              _currentIndex2 = entry.key;
+                            }),
                         child: Container(
                           width: 8.0,
                           height: 8.0,
@@ -249,7 +275,8 @@ class _HomePageState extends State<HomePage> {
                             shape: BoxShape.circle,
                             color: _currentIndex2 == entry.key
                                 ? Colors.blue // Active indicator color
-                                : Colors.blue.withOpacity(0.3), // Inactive indicator color
+                                : Colors.blue.withOpacity(
+                                0.3), // Inactive indicator color
                           ),
                         ),
                       );
@@ -258,13 +285,16 @@ class _HomePageState extends State<HomePage> {
 
                   //for men
                   SizedBox(height: 20,),
-                  Align(alignment:Alignment.center,child: Text(" Shop by Category- Men",style: TextStyle(fontSize: 30),)),
+                  Align(alignment: Alignment.center,
+                      child: Text(" Shop by Category- Men",
+                        style: TextStyle(fontSize: 30),)),
                   Center(
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 10,
                         mainAxisSpacing: 10, // Vertical spacing between items
-                        childAspectRatio: 2 / 3, // Adjust the width-to-height ratio
+                        childAspectRatio: 2 /
+                            3, // Adjust the width-to-height ratio
                       ),
                       itemCount: 15,
                       shrinkWrap: true,
@@ -274,14 +304,15 @@ class _HomePageState extends State<HomePage> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => products()),
+                              MaterialPageRoute(
+                                  builder: (context) => products()),
                             );
                           },
                           child: Container(
-                              color: index.isEven ? Colors.blue : Colors.red,
-                              child: Center(
-                                child: Text('$index'),
-                              ),
+                            color: index.isEven ? Colors.blue : Colors.red,
+                            child: Center(
+                              child: Text('$index'),
+                            ),
                           ),
                         );
                       },
@@ -289,13 +320,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   //for women
                   SizedBox(height: 20,),
-                  Align(alignment:Alignment.center,child: Text(" Shop by Category- Women",style: TextStyle(fontSize: 30),)),
+                  Align(alignment: Alignment.center,
+                      child: Text(" Shop by Category- Women",
+                        style: TextStyle(fontSize: 30),)),
                   Center(
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 10,
                         mainAxisSpacing: 10, // Vertical spacing between items
-                        childAspectRatio: 2 / 3, // Adjust the width-to-height ratio
+                        childAspectRatio: 2 /
+                            3, // Adjust the width-to-height ratio
                       ),
                       itemCount: 15,
                       shrinkWrap: true,
@@ -305,7 +339,8 @@ class _HomePageState extends State<HomePage> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => products()),
+                              MaterialPageRoute(
+                                  builder: (context) => products()),
                             );
                           },
                           child: Container(
@@ -321,7 +356,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 20,),
                   Container(
                     color: Colors.black,
-                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -389,7 +425,8 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Icon(Icons.twelve_mp, color: Colors.white),
                                     SizedBox(width: 10),
-                                    Icon(Icons.pin_end_outlined, color: Colors.white),
+                                    Icon(Icons.pin_end_outlined,
+                                        color: Colors.white),
                                     SizedBox(width: 10),
                                     Icon(Icons.apple, color: Colors.white),
                                   ],
@@ -474,69 +511,69 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-Widget tabItem(String title) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-    child: Text(
-      title,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-    ),
-  );
-}
-
-Widget carouselItem(String imagePath, String title, String subtitle) {
-  return Stack(
-    children: [
-      Image.asset(
-        imagePath,
-        fit: BoxFit.cover,
-        width: double.infinity,
+  Widget tabItem(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
-      Positioned(
-        bottom: 30,
-        left: 20,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            if (subtitle.isNotEmpty)
+    );
+  }
+
+  Widget carouselItem(String imagePath, String title, String subtitle) {
+    return Stack(
+      children: [
+        Image.asset(
+          imagePath,
+          fit: BoxFit.cover,
+          width: double.infinity,
+        ),
+        Positioned(
+          bottom: 30,
+          left: 20,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                subtitle,
+                title,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-          ],
-        ),
-      ),
-    ],
-  );
-}
-
-Widget gridItem(String imagePath, String title) {
-  return Card(
-    elevation: 40,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    color: Colors.white,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(imagePath, height: 80),
-        SizedBox(height: 10),
-        Text(
-          title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              if (subtitle.isNotEmpty)
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+            ],
+          ),
         ),
       ],
-    ),
-  );
-}
+    );
+  }
+
+  Widget gridItem(String imagePath, String title) {
+    return Card(
+      elevation: 40,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(imagePath, height: 80),
+          SizedBox(height: 10),
+          Text(
+            title,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
 }
